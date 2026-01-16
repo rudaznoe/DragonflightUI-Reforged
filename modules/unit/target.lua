@@ -8,7 +8,7 @@ DFRL:NewDefaults("Target", {
     noPercent = {true, "checkbox", nil, "textShow", "Text", 6, "Show only current values without percentages", nil, nil},
     textColoringHealth = {false, "checkbox", nil, "textShow", "Text", 7, "Color text based on health percentage", nil, nil},
     textColoringResource = {false, "checkbox", nil, "textShow", "Text", 8, "Color text based on resource (mana/rage/energy) percentage", nil, nil},
-    frameFont = {"Prototype", "dropdown", {
+    frameFont = {"FRIZQT__.TTF", "dropdown", {
         "FRIZQT__.TTF",
         "Expressway",
         "Homespun",
