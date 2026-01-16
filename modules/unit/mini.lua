@@ -6,7 +6,7 @@ DFRL:NewDefaults("Mini", {
     totFrameScale = {1, "slider", {0.7, 1.3}, nil, "Appearance", 4, "Adjust target of target frame size", nil, nil},
     partyFrameScale = {1, "slider", {0.7, 1.3}, nil, "Appearance", 5, "Adjust party frame size", nil, nil},
     miniTextShow = {true, "checkbox", nil, nil, "Text", 6, "Show pet/target of target/party health and mana text", nil, nil},
-    frameFont = {"Prototype", "dropdown", {
+    frameFont = {"FRIZQT__.TTF", "dropdown", {
         "FRIZQT__.TTF",
         "Expressway",
         "Homespun",
