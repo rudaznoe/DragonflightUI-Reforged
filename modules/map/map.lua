@@ -186,81 +186,24 @@ DFRL:NewMod("Map", 1, function()
             self.mailIcon = MiniMapMailIcon
         end
 
-
         function Setup:Buffs()
-            -- DFUI-compatible aura anchoring.
-            -- Replicates WoW Vanilla approach: only set the "row starter" buttons.
-            -- We DO NOT reposition every buff button manually (that breaks DFUI movers).
+            BuffButton0:ClearAllPoints()
+            BuffButton0:SetPoint("TOPRIGHT", Setup.topPanel, "TOPLEFT", -50, 0)
 
-            local buff0 = _G["BuffButton0"] or _G["BuffButton1"]
-            if not buff0 then return end
+            BuffButton8:ClearAllPoints()
+            BuffButton8:SetPoint("TOPRIGHT", Setup.topPanel, "TOPLEFT", -50, -50)
 
-            local startIndex = _G["BuffButton0"] and 0 or 1
+            TempEnchant1:ClearAllPoints()
+            TempEnchant1:SetPoint("TOPRIGHT", Setup.topPanel, "TOPLEFT", -50, -100)
 
-            local function getBtn(i)
-                return _G["BuffButton" .. tostring(i)]
-            end
+            BuffButton16:ClearAllPoints()
+            BuffButton16:SetPoint("TOPRIGHT", Setup.topPanel, "TOPLEFT", -50, -150)
 
-            local function apply()
-                local p, rel, rp, x, y = buff0:GetPoint(1)
-                if not p then return end
-
-                -- These offsets replicate the original DFUI Map.lua logic
-                -- (BuffButton0 at y=0, BuffButton8 at y=-50, TempEnchant1 at y=-100, BuffButton16 at y=-150, BuffButton32 at y=-200)
-                local row2 = getBtn(startIndex + 8)
-                if row2 then
-                    row2:ClearAllPoints()
-                    row2:SetPoint(p, rel, rp, x, y - 50)
-                end
-
-                local ench = _G["TempEnchant1"]
-                if ench then
-                    ench:ClearAllPoints()
-                    ench:SetPoint(p, rel, rp, x, y - 100)
-                end
-
-                local row3 = getBtn(startIndex + 16)
-                if row3 then
-                    row3:ClearAllPoints()
-                    row3:SetPoint(p, rel, rp, x, y - 150)
-                end
-
-		local row4 = getBtn(startIndex + 32)
-                if row4 then
-                    row4:ClearAllPoints()
-                    row4:SetPoint(p, rel, rp, x, y - 200)
-                end
-            end
-
-            -- Apply once on load
-            apply()
-
-            -- Re-apply whenever DFUI (or the user mover) changes BuffButton0's position.
-            local watcher = _G["DFRL_BuffAnchorWatcher"]
-            if not watcher then
-                watcher = CreateFrame("Frame", "DFRL_BuffAnchorWatcher", UIParent)
-                watcher._tick = 0
-                watcher._last = nil
-                watcher:SetScript("OnUpdate", function()
-                    watcher._tick = (watcher._tick or 0) + arg1
-                    if watcher._tick < 0.2 then return end
-                    watcher._tick = 0
-
-                    if not buff0 or not buff0.GetPoint then return end
-                    local p, rel, rp, x, y = buff0:GetPoint(1)
-                    if not p then return end
-
-                    local key = tostring(p) .. "|" .. tostring(rel) .. "|" .. tostring(rp) .. "|" .. tostring(x) .. "|" .. tostring(y)
-                    if key ~= watcher._last then
-                        watcher._last = key
-                        apply()
-                    end
-                end)
-            end
+	    BuffButton32:ClearAllPoints()
+            BuffButton32:SetPoint("TOPRIGHT", Setup.topPanel, "TOPLEFT", -50, -200)
         end
 
         function Setup:Tracker()
-
             MiniMapTrackingFrame:ClearAllPoints()
             MiniMapTrackingFrame:SetPoint("TOPRIGHT", self.topPanel, "TOPLEFT", -15, 0)
             MiniMapTrackingFrame:SetScale(0.6)
