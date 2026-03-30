@@ -321,7 +321,11 @@ DFRL:NewMod("Gui-prof", 4, function()
 
         end
         if not self.ui.saveBtn then
+<<<<<<< HEAD
             self.ui.saveBtn = DFRL.tools.CreateButton(panel, "Save Profile", 130, 30, true, {0.5, 1, 0.5})
+=======
+            self.ui.saveBtn = DFRL.tools.CreateButton(panel, "Save Profile", 120, 30, true, {0.5, 1, 0.5})
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
             self.ui.saveBtn:SetPoint("TOPLEFT", self.ui.resetBtn, "BOTTOMLEFT", 0, -10)
             self.ui.saveBtn:SetScript("OnClick", function()
                 DFRL:SaveTempDB()

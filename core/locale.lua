@@ -163,6 +163,7 @@ DFRL.locale.translations.frFR = {
     ["Color text based on resource (mana/rage/energy) percentage from white to red"] = "Colore le texte selon le pourcentage de ressource (mana/rage/energie), du blanc au rouge",
     ["Colorize the PizzaWorldBuffs Alliance/Horde text"] = "Colorise le texte Alliance/Horde de PizzaWorldBuffs",
     ["Combat Effects"] = "Effets de combat",
+<<<<<<< HEAD
     ["Copy"] = "Copier",
     ["Compact Horizontal"] = "Compact horizontal",
     ["Compact Vertical"] = "Compact vertical",
@@ -181,12 +182,19 @@ DFRL.locale.translations.frFR = {
     ["Vertical Down"] = "Vertical vers le bas",
     ["Vertical Up"] = "Vertical vers le haut",
     ["Vertical modes are especially useful for compact hunter layouts"] = "Les modes verticaux sont particulierement utiles pour les chasseurs avec une interface compacte",
+=======
+    ["Copy"] = "Copie",
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Current"] = "Actuel",
     ["CURRENT PROFILE RESET"] = "PROFIL ACTUEL REINITIALISE",
     ["Dark Mode"] = "Mode sombre",
     ["Database Version:"] = "Version base de donnees :",
     ["Default"] = "Defaut",
+<<<<<<< HEAD
     ["Delete"] = "Supprimer",
+=======
+    ["Delete"] = "Supp.",
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["deleted"] = "supprime",
     ["dfrl evolved"] = "dfrl evolved",
     ["dfrl nebula"] = "dfrl nebula",
@@ -215,7 +223,10 @@ DFRL.locale.translations.frFR = {
     ["font"] = "Police",
     ["FPS:"] = "FPS :",
     ["Francais"] = "Francais",
+<<<<<<< HEAD
     ["Français"] = "Francais",
+=======
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["GUI-Dragonflight"] = "Interface generale",
     ["Health Bar"] = "Barre de vie",
     ["Health Bars"] = "Barres de vie",
@@ -294,12 +305,20 @@ DFRL.locale.translations.frFR = {
     ["Reload UI"] = "Recharger l'UI",
     ["reputation Bar"] = "Barre de reputation",
     ["Requires ShaguTweaks"] = "Necessite ShaguTweaks",
+<<<<<<< HEAD
     ["Reset"] = "Reinitialiser",
+=======
+    ["Reset"] = "Reinit.",
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Resting Effects"] = "Effets de repos",
     ["Resume Game"] = "Reprendre le jeu",
     ["right"] = "droite",
     ["RIGHT"] = "DROITE",
+<<<<<<< HEAD
     ["Save Profile"] = "Enregistrer le profil",
+=======
+    ["Save Profile"] = "Sauver profil",
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Script"] = "Script",
     ["Select the language used in the configuration UI"] = "Choisit la langue utilisee dans l'interface de configuration",
     ["Set fill direction"] = "Definit la direction de remplissage",
@@ -354,7 +373,11 @@ DFRL.locale.translations.frFR = {
     ["Status"] = "Statut",
     ["Supported Addons"] = "Addons pris en charge",
     ["Swap the anchorpoint of the paging buttons"] = "Inverse le point d'ancrage des boutons de pagination",
+<<<<<<< HEAD
     ["Switch"] = "Activer",
+=======
+    ["Switch"] = "Act.",
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Switch between gray and colorfull micro menu"] = "Bascule entre le micro-menu gris ou colore",
     ["switched to"] = "profil actif :",
     ["System"] = "Systeme",
@@ -385,6 +408,7 @@ DFRL.locale.translations.frFR = {
     ["Use the alternative gryphon/wyvern textures"] = "Utilise les textures alternatives gryphon/wyvern",
     ["Xprep"] = "XP/Reputation",
 
+<<<<<<< HEAD
     ["Navigation"] = "Navigation",
     ["Drag to move - ESC to close"] = "Glisser pour deplacer - ECHAP pour fermer",
     ["Profiles help text"] = "Utilisation :\n\n1) Nouveau profil : creer et activer un nouveau profil\n2) Activer : changer le profil actif\n3) Copier : copier tous les reglages vers le profil actif\n4) Supprimer : supprimer le profil et revenir sur Defaut\n5) Reinitialiser : restaurer les reglages du profil actif\n\nRemarque : n'affecte pas ShaguTweaks.",
@@ -396,6 +420,8 @@ DFRL.locale.translations.frFR = {
     ["Switch"] = "Activer",
     ["Copy"] = "Copier",
     ["Reset"] = "Reinitialiser",
+=======
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Adjusts background alpha of XP and reputation bars"] = "Ajuste l'alpha de fond des barres d'XP et de reputation",
     ["Adjusts font size of the zone text"] = "Ajuste la taille de police du texte de zone",
     ["Adjusts horizontal position of gryphon/wyvern decorations"] = "Ajuste la position horizontale des decorations gryphon/wyvern",
@@ -501,11 +527,14 @@ DFRL.locale.configLabels.frFR = {
     ["Bars.petbarGrid"] = "Grille barre familier",
     ["Bars.petbarScale"] = "Echelle barre familier",
     ["Bars.petbarSpacing"] = "Espacement barre familier",
+<<<<<<< HEAD
     ["Bars.petbarOrientation"] = "Orientation barre familier",
     ["Bars.petbarButtonSize"] = "Taille boutons familier",
     ["Bars.petbarPreset"] = "Preset barre familier",
     ["Bars.petbarAutoCastAlpha"] = "Intensite glow auto-cast",
     ["Bars.petbarShineAlpha"] = "Intensite shine auto-cast",
+=======
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
     ["Bars.shapeshiftAlpha"] = "Transparence metamorphose",
     ["Bars.shapeshiftScale"] = "Echelle metamorphose",
     ["Bars.shapeshiftSpacing"] = "Espacement metamorphose",
@@ -805,8 +834,12 @@ function DFRL:TranslateWords(text)
 
     local result = {}
     for token in string.gfind(text, "%S+") do
+<<<<<<< HEAD
         local core = string.gsub(token, "([%.,:;!%?])$", "")
         local _, _, punct = string.find(token, "([%.,:;!%?])$")
+=======
+        local core, punct = string.gsub(token, "([%.,:;!%?])$", ""), string.match(token, "([%.,:;!%?])$")
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
         local lookup = string.lower(core or token)
         local translated = map[lookup] or core
         table.insert(result, translated .. (punct or ""))

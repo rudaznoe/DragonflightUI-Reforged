@@ -9,7 +9,10 @@
 # CORE
 core\error.lua
 core\core.lua
+<<<<<<< HEAD
 core\debug.lua
+=======
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
 core\locale.lua
 core\tools.lua
 core\statusbar.lua

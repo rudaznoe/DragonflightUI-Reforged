@@ -55,6 +55,7 @@ DFRL:NewDefaults("Bars", {
     petbarSpacing = {6, "slider", {0.1, 20}, nil, "pet bar", 52, "Adjusts spacing between pet action bar buttons", nil, nil},
     petbarAlpha = {1, "slider", {0.1, 1}, nil, "pet bar", 53, "Adjusts transparency of pet action bar", nil, nil},
     petbarGrid = {1, "slider", {1, 6}, nil, "pet bar", 54, "Changes the grid layout of pet action bar", "5 = 2 columns x 5 rows", nil},
+<<<<<<< HEAD
     petbarOrientation = {"Horizontal", "dropdown", {"Horizontal", "Vertical Down", "Vertical Up"}, nil, "pet bar", 55, "Choose how the pet bar grows when using a single row layout", "Vertical modes are especially useful for compact hunter layouts", nil},
     petbarButtonSize = {30, "slider", {20, 40}, nil, "pet bar", 56, "Adjusts the size of pet action bar buttons", nil, nil},
     petbarPreset = {"Custom", "dropdown", {"Custom", "Default", "Compact Vertical", "Compact Horizontal", "Grid 2x5"}, nil, "pet bar", 57, "Apply a quick preset for the pet bar", nil, nil},
@@ -63,6 +64,11 @@ DFRL:NewDefaults("Bars", {
     shapeshiftScale = {0.8, "slider", {0.2, 2}, nil, "shapeshift bar", 60, "Adjusts the scale of the shapeshift bar", nil, nil},
     shapeshiftSpacing = {6, "slider", {0.1, 20}, nil, "shapeshift bar", 61, "Adjusts spacing between shapeshift buttons", nil, nil},
     shapeshiftAlpha = {1, "slider", {0.1, 1}, nil, "shapeshift bar", 62, "Adjusts transparency of shapeshift bar", nil, nil},
+=======
+    shapeshiftScale = {0.8, "slider", {0.2, 2}, nil, "shapeshift bar", 55, "Adjusts the scale of the shapeshift bar", nil, nil},
+    shapeshiftSpacing = {6, "slider", {0.1, 20}, nil, "shapeshift bar", 56, "Adjusts spacing between shapeshift buttons", nil, nil},
+    shapeshiftAlpha = {1, "slider", {0.1, 1}, nil, "shapeshift bar", 57, "Adjusts transparency of shapeshift bar", nil, nil},
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
 })
 
 DFRL:NewMod("Bars", 1, function()
@@ -370,12 +376,18 @@ DFRL:NewMod("Bars", 1, function()
                         local autoCast = button.AutoCastable or _G[name .. "AutoCastable"]
                         local autoCast2 = button.AutoCast or _G[name .. "AutoCast"]
 
+<<<<<<< HEAD
                         local shineAlpha = DFRL:GetTempDB('Bars', 'petbarShineAlpha') or 0.28
                         local autoCastAlpha = DFRL:GetTempDB('Bars', 'petbarAutoCastAlpha') or 0.40
 
                         softenTexture(shine, shineAlpha)
                         softenTexture(autoCast, autoCastAlpha)
                         softenTexture(autoCast2, autoCastAlpha)
+=======
+                        softenTexture(shine, 0.28)
+                        softenTexture(autoCast, 0.40)
+                        softenTexture(autoCast2, 0.40)
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
                     end
                 end
             end
@@ -386,6 +398,7 @@ DFRL:NewMod("Bars", 1, function()
             self.petBarAutoCastFrame:RegisterEvent("PET_BAR_UPDATE")
             self.petBarAutoCastFrame:RegisterEvent("PET_BAR_UPDATE_USABLE")
             self.petBarAutoCastFrame:RegisterEvent("PET_UI_UPDATE")
+<<<<<<< HEAD
             self.petBarAutoCastFrame:SetScript("OnEvent", function()
                 if DFRL.DebugLog then
                     DFRL:DebugLog('bars', 'PetBarAutoCastEvent', event or 'nil', arg1 or 'nil')
@@ -399,6 +412,15 @@ DFRL:NewMod("Bars", 1, function()
                 elapsed = elapsed + (arg1 or 0)
                 if elapsed > 1 then
                     this:SetScript('OnUpdate', nil)
+=======
+            self.petBarAutoCastFrame:SetScript("OnEvent", applyPetAutoCastLook)
+
+            local elapsed = 0
+            self.petBarAutoCastFrame:SetScript("OnUpdate", function()
+                elapsed = elapsed + arg1
+                if elapsed > 0.25 then
+                    elapsed = 0
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
                     applyPetAutoCastLook()
                 end
             end)
@@ -639,8 +661,14 @@ DFRL:NewMod("Bars", 1, function()
                 end
             end,
 
+<<<<<<< HEAD
             normalizeLayoutIndex = function(value)
                 local layoutIndex = math.floor((value or 1) + 0.5)
+=======
+            setGridLayout = function(barFrame, buttonPrefix, value, spacingKey, maxButtons)
+                maxButtons = maxButtons or 12
+                local layoutIndex = math.floor(value + 0.5)
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
                 if layoutIndex < 1 then layoutIndex = 1 end
                 if layoutIndex > 6 then layoutIndex = 6 end
                 return layoutIndex
@@ -654,6 +682,7 @@ DFRL:NewMod("Bars", 1, function()
 
                 local spacing = DFRL:GetTempDB('Bars', spacingKey)
                 local firstButton = _G[buttonPrefix .. '1']
+<<<<<<< HEAD
                 if not firstButton then
                     if DFRL.DebugLog then
                         DFRL:DebugLog('bars', 'GridLayoutSkipped', buttonPrefix, 'button 1 missing')
@@ -669,6 +698,15 @@ DFRL:NewMod("Bars", 1, function()
                     DFRL:DebugLog('bars', 'GridLayout', buttonPrefix, 'layout', layoutIndex, 'cols', effectiveCols, 'rows', effectiveRows, 'spacing', spacing)
                 end
 
+=======
+                if not firstButton then return end
+                local buttonSize = firstButton:GetWidth()
+                local isReversed = buttonPrefix == 'MultiBarLeftButton' or buttonPrefix == 'MultiBarRightButton'
+                local isPetBar = buttonPrefix == 'PetActionButton'
+                local effectiveCols = math.min(layout.cols, maxButtons)
+                local effectiveRows = math.ceil(maxButtons / effectiveCols)
+
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
                 for i = (isReversed and maxButtons or 1), (isReversed and 1 or maxButtons), (isReversed and -1 or 1) do
                     local button = _G[buttonPrefix .. i]
                     if button then
@@ -676,12 +714,22 @@ DFRL:NewMod("Bars", 1, function()
                         local index = isReversed and (maxButtons + 1 - i) or i
                         local row = math.floor((index - 1) / effectiveCols)
                         local col = (index - 1) - (row * effectiveCols)
+<<<<<<< HEAD
                         button:SetPoint('BOTTOMLEFT', barFrame, 'BOTTOMLEFT', col * (buttonSize + spacing), row * (buttonSize + spacing))
+=======
+
+                        if isPetBar and effectiveRows > 1 then
+                            button:SetPoint('TOPLEFT', barFrame, 'TOPLEFT', col * (buttonSize + spacing), -row * (buttonSize + spacing))
+                        else
+                            button:SetPoint('BOTTOMLEFT', barFrame, 'BOTTOMLEFT', col * (buttonSize + spacing), row * (buttonSize + spacing))
+                        end
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
                     end
                 end
 
                 barFrame:SetHeight((buttonSize + spacing) * effectiveRows - spacing)
                 barFrame:SetWidth((buttonSize + spacing) * effectiveCols - spacing)
+<<<<<<< HEAD
             end,
 
             applyPetBarButtonSize = function(size)
@@ -757,6 +805,8 @@ DFRL:NewMod("Bars", 1, function()
                 if DFRL.DebugLog then
                     DFRL:DebugLog('bars', 'PetBarLayout', 'grid', layoutIndex, 'orientation', orientation, 'cols', cols, 'rows', rows, 'size', buttonSize, 'spacing', spacing)
                 end
+=======
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
             end,
 
             iterateButtons = function(callback)
@@ -1130,7 +1180,21 @@ DFRL:NewMod("Bars", 1, function()
         end
 
         callbacks.petbarSpacing = function(value)
+<<<<<<< HEAD
             helpers.applyPetBarLayout()
+=======
+            local gridLayout = DFRL:GetTempDB('Bars', 'petbarGrid')
+            if math.floor(gridLayout + 0.5) ~= 1 then
+                helpers.setGridLayout(DFRL.newPetBar, 'PetActionButton', gridLayout, 'petbarSpacing', 10)
+                return
+            end
+            helpers.setSpacing('PetActionButton', value, 'horizontal', 10)
+            if DFRL.newPetBar and PetActionButton1 then
+                local buttonSize = PetActionButton1:GetWidth()
+                DFRL.newPetBar:SetWidth((buttonSize + value) * 10 - value)
+                DFRL.newPetBar:SetHeight(buttonSize)
+            end
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
         end
 
         callbacks.petbarAlpha = function(value)
@@ -1315,7 +1379,11 @@ DFRL:NewMod("Bars", 1, function()
 
         callbacks.petbarGrid = function(value)
             if not DFRL.newPetBar then return end
+<<<<<<< HEAD
             helpers.applyPetBarLayout()
+=======
+            helpers.setGridLayout(DFRL.newPetBar, 'PetActionButton', value, 'petbarSpacing', 10)
+>>>>>>> 1129cc9 (Add pet bar improvements + FR + profile save)
         end
 
         callbacks.mainBarScale = function(value)
