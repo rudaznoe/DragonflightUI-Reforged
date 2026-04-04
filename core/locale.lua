@@ -436,7 +436,6 @@ DFRL.locale.translations.frFR = {
 
     ["Change the font used for all smaller frames"] = "Change la police utilisee pour tous les petits cadres",
 }
-
 DFRL.locale.configLabels.frFR = {
     ["Bags.bagAlpha"] = "Transparence sacs",
     ["Bags.bagColor"] = "Couleur sacs",
@@ -684,8 +683,6 @@ DFRL.locale.configLabels.frFR = {
     ["Xprep.xpBarWidth"] = "Largeur barre XP",
     ["Xprep.xprepColor"] = "Couleur XP/Rep",
     ["Xprep.xprepDarkMode"] = "Mode sombre XP/Rep",
-}
-
 DFRL.locale.wordMap.frFR = {
     ["alpha"] = "alpha",
     ["bag"] = "sac",
@@ -759,90 +756,60 @@ DFRL.locale.wordMap.frFR = {
     ["xp"] = "XP",
     ["y"] = "Y",
     ["zoom"] = "zoom",
-}
-
 function DFRL:GetLanguage()
     local language = nil
     if self.tempDB and self.tempDB["GUI-Dragonflight"] and self.tempDB["GUI-Dragonflight"].language then
         language = self.tempDB["GUI-Dragonflight"].language
     end
-
     if not language or language == "" then
         if GetLocale and GetLocale() == "frFR" then
             return "Francais"
         end
         return "English"
-    end
-
     return language
 end
-
 function DFRL:IsFrench()
     local language = self:GetLanguage()
     return language == "Francais" or language == "Français" or language == "frFR" or language == "fr"
-end
-
 function DFRL:TR(text)
     if text == nil then return text end
     if not self:IsFrench() then return text end
-
     local tbl = self.locale and self.locale.translations and self.locale.translations.frFR
     if not tbl then return text end
     return tbl[text] or text
-end
-
 function DFRL:HumanizeKey(key)
     if not key then return "" end
     local displayTxt = string.gsub(key, "(%l)(%u)", "%1 %2")
     displayTxt = string.upper(string.sub(displayTxt, 1, 1)) .. string.sub(displayTxt, 2)
     return displayTxt
-end
-
 function DFRL:TranslateWords(text)
     if not text or text == "" then return text end
     local map = self.locale and self.locale.wordMap and self.locale.wordMap.frFR
     if not map then return text end
-
     local result = {}
     for token in string.gfind(text, "%S+") do
-        local core = string.gsub(token, "([%.,:;!%?])$", "")
-        local _, _, punct = string.find(token, "([%.,:;!%?])$")
+        local core, punct = string.gsub(token, "([%.,:;!%?])$", ""), string.match(token, "([%.,:;!%?])$")
         local lookup = string.lower(core or token)
         local translated = map[lookup] or core
         table.insert(result, translated .. (punct or ""))
-    end
     return table.concat(result, " ")
-end
-
 function DFRL:GetOptionLabel(moduleName, key)
     local fallback = self:HumanizeKey(key)
     if not self:IsFrench() then
         return fallback
-    end
-
     local tbl = self.locale and self.locale.configLabels and self.locale.configLabels.frFR
     if tbl then
         local exactKey = (moduleName and key) and (moduleName .. "." .. key) or nil
         if exactKey and tbl[exactKey] then
             return tbl[exactKey]
-        end
         if tbl[key] then
             return tbl[key]
-        end
-    end
-
     local translated = self:TR(fallback)
     if translated ~= fallback then
         return translated
-    end
-
     return self:TranslateWords(fallback)
-end
-
 function DFRL:DisplayProfileName(name)
     if not name then return "" end
     if name == "Default" then
         return self:TR("Default")
-    end
     return name
-end

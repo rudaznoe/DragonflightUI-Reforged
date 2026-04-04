@@ -662,6 +662,7 @@ DFRL:NewMod("Bars", 1, function()
                 end
                 local buttonSize = firstButton:GetWidth()
                 local isReversed = buttonPrefix == 'MultiBarLeftButton' or buttonPrefix == 'MultiBarRightButton'
+                local isPetBar = buttonPrefix == 'PetActionButton'
                 local effectiveCols = math.min(layout.cols, maxButtons)
                 local effectiveRows = math.ceil(maxButtons / effectiveCols)
 
@@ -676,7 +677,12 @@ DFRL:NewMod("Bars", 1, function()
                         local index = isReversed and (maxButtons + 1 - i) or i
                         local row = math.floor((index - 1) / effectiveCols)
                         local col = (index - 1) - (row * effectiveCols)
-                        button:SetPoint('BOTTOMLEFT', barFrame, 'BOTTOMLEFT', col * (buttonSize + spacing), row * (buttonSize + spacing))
+
+                        if isPetBar and effectiveRows > 1 then
+                            button:SetPoint('TOPLEFT', barFrame, 'TOPLEFT', col * (buttonSize + spacing), -row * (buttonSize + spacing))
+                        else
+                            button:SetPoint('BOTTOMLEFT', barFrame, 'BOTTOMLEFT', col * (buttonSize + spacing), row * (buttonSize + spacing))
+                        end
                     end
                 end
 
